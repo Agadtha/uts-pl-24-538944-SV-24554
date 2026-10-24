@@ -16,6 +16,7 @@ const STOK_MENIPIS = 20
 const items = ref([])
 const meta = ref({ current_page: 1, last_page: 1, total: 0 })
 const cari = ref('')
+const menipis = ref(false)
 const loading = ref(false)
 const loadError = ref('')
 const notice = ref('')
@@ -43,8 +44,12 @@ async function load(page = 1) {
   loading.value = true
   loadError.value = ''
   try {
-    const { data } = await http.get('/barang', {
-      params: { page, cari: cari.value || undefined },
+     const { data } = await http.get('/barang', {
+      params: {
+        page,
+        cari: cari.value || undefined,
+        stok_menipis: menipis.value ? 1 : undefined,
+      },
     })
     items.value = data.data
     meta.value = { current_page: data.current_page, last_page: data.last_page, total: data.total }
@@ -56,7 +61,7 @@ async function load(page = 1) {
 }
 
 let timer
-watch(cari, () => {
+watch([cari, menipis], () => {
   clearTimeout(timer)
   timer = setTimeout(() => load(1), 350)
 })
@@ -135,6 +140,7 @@ async function remove(item) {
         <p class="muted">{{ meta.total }} barang tercatat</p>
       </div>
       <div class="actions">
+        <label class="check"><input v-model="menipis" type="checkbox" /> Stok menipis</label>
         <input v-model="cari" class="search" type="search" placeholder="Cari nama atau kode" aria-label="Cari barang" />
         <button class="btn primary" @click="openCreate">Tambah barang</button>
       </div>
