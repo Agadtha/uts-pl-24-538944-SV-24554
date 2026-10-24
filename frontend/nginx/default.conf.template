@@ -1,0 +1,23 @@
+server {
+    listen 80;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # DNS internal Docker; nama service diselesaikan saat request, bukan saat nginx start
+    resolver 127.0.0.11 valid=10s ipv6=off;
+
+    # Permintaan API diteruskan ke container backend lewat nama service
+    location /api/ {
+        set $backend_upstream http://${BACKEND_HOST}:${BACKEND_PORT};
+        proxy_pass $backend_upstream;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Vue Router (mode history): semua path lain diarahkan ke index.html
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

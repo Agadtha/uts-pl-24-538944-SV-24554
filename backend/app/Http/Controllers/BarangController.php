@@ -24,6 +24,10 @@ class BarangController extends Controller
             });
         }
 
+        if ($request->boolean('stok_menipis')) {
+            $query->where('stok', '<=', 20);
+        }
+
         return response()->json($query->latest()->paginate(10), 200);
     }
 

@@ -1,0 +1,70 @@
+name: inventori-gudang
+
+services:
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-gudang}
+      MYSQL_USER: ${DB_USERNAME:-gudang_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Isi DB_PASSWORD di file .env}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Isi DB_ROOT_PASSWORD di file .env}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_NAME: Inventori Gudang
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY:?Isi APP_KEY di file .env (php artisan key:generate --show)}
+      APP_URL: http://localhost:8080
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: mysql
+      DB_HOST: db                      # nama service basis data
+      DB_PORT: "3306"
+      DB_DATABASE: ${DB_DATABASE:-gudang}
+      DB_USERNAME: ${DB_USERNAME:-gudang_user}
+      DB_PASSWORD: ${DB_PASSWORD:?Isi DB_PASSWORD di file .env}
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      RUN_SEEDER: ${RUN_SEEDER:-true}
+      PHP_CLI_SERVER_WORKERS: "4"
+    ports:
+      - "8000:8000"                    # untuk uji lewat Postman
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8000/up || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      BACKEND_HOST: backend            # nama service backend
+      BACKEND_PORT: "8000"
+    ports:
+      - "8080:80"
+
+volumes:
+  db_data:

@@ -80,6 +80,8 @@ input:focus { border-color: var(--steel); outline: none; }
 .toolbar { display: flex; justify-content: space-between; align-items: end; gap: 1rem; flex-wrap: wrap; }
 .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .search { width: 240px; }
+.check { display: flex; align-items: center; gap: 0.4rem; margin: 0; font-weight: 500; }
+.check input { width: auto; }
 
 .table-wrap { overflow-x: auto; margin-top: 1rem; background: var(--paper); border: 1px solid var(--line); border-radius: 4px; }
 table { width: 100%; border-collapse: collapse; min-width: 760px; }

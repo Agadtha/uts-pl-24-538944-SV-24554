@@ -118,4 +118,16 @@ class BarangTest extends TestCase
 
         $this->assertDatabaseMissing('barang', ['id' => $barang->id]);
     }
+
+    public function test_filter_stok_menipis(): void
+    {
+        Sanctum::actingAs(User::factory()->create());
+        Barang::factory()->create(['stok' => 5]);
+        Barang::factory()->create(['stok' => 20]);
+        Barang::factory()->create(['stok' => 100]);
+
+        $this->getJson('/api/barang?stok_menipis=1')
+            ->assertOk()
+            ->assertJsonCount(2, 'data');
+    }
 }
