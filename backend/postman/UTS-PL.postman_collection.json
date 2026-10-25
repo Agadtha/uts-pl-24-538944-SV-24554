@@ -1,0 +1,277 @@
+{
+  "info": {
+    "_postman_id": "27cd0c87-6d72-407f-8f22-02ad5530e5fd",
+    "name": "UTS-PL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50549650",
+    "_collection_link": "https://go.postman.co/collection/50549650-27cd0c87-6d72-407f-8f22-02ad5530e5fd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"kode_barang\": \"BRG-201\",\r\n  \"nama\": \"Troli Barang Lipat\",\r\n  \"kategori\": \"Peralatan\",\r\n  \"satuan\": \"unit\",\r\n  \"stok\": 15,\r\n  \"harga\": 450000,\r\n  \"lokasi_rak\": \"C-07\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/barang",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "barang"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login 401",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"kode_barang\": \"BRG-201\",\r\n  \"nama\": \"Troli Barang Lipat\",\r\n  \"kategori\": \"Peralatan\",\r\n  \"satuan\": \"unit\",\r\n  \"stok\": 15,\r\n  \"harga\": 450000,\r\n  \"lokasi_rak\": \"C-07\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/barang",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "barang"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login 422",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"kode_barang\": \"BRG-201\",\r\n  \"nama\": \"Troli Barang Lipat\",\r\n  \"kategori\": \"Peralatan\",\r\n  \"satuan\": \"unit\",\r\n  \"stok\": 15,\r\n  \"harga\": 450000,\r\n  \"lokasi_rak\": \"C-07\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/barang",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "barang"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tampilsemua",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tampilsatu",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "tambah",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "edit",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "5|8aJYmjprnTBnoBadEaMylDfNMKYoUHwRrfxHTeFA37ffef69",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"kode_barang\": \"BRG-010\",\r\n    \"nama\": \"Troli Barang Lipat\", \r\n    \"kategori\": \"Peralatan\",\r\n    \"satuan\": \"unit\",\r\n    \"stok\": 30,\r\n    \r\n    \"harga\": 450000, \r\n    \"lokasi_rak\":\"C-07\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/barang/4",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "barang",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "hapus",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "4|TWO96sTpb7KP8j5j2UQDdxRc97eUtN39v4MK90jTd55b36f2",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/logout",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

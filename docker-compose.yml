@@ -32,7 +32,7 @@ services:
       APP_URL: http://localhost:8080
       LOG_CHANNEL: stderr
       DB_CONNECTION: mysql
-      DB_HOST: db                      # nama service basis data
+      DB_HOST: db                      
       DB_PORT: "3306"
       DB_DATABASE: ${DB_DATABASE:-gudang}
       DB_USERNAME: ${DB_USERNAME:-gudang_user}
@@ -41,9 +41,8 @@ services:
       CACHE_STORE: file
       QUEUE_CONNECTION: sync
       RUN_SEEDER: ${RUN_SEEDER:-true}
-      PHP_CLI_SERVER_WORKERS: "4"
     ports:
-      - "8000:8000"                    # untuk uji lewat Postman
+      - "8000:8000"                    
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:8000/up || exit 1"]
       interval: 5s
@@ -61,7 +60,7 @@ services:
       backend:
         condition: service_healthy
     environment:
-      BACKEND_HOST: backend            # nama service backend
+      BACKEND_HOST: backend            
       BACKEND_PORT: "8000"
     ports:
       - "8080:80"

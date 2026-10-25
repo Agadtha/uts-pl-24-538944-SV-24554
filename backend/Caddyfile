@@ -1,0 +1,22 @@
+{
+	# Tidak ada HTTPS otomatis dan tidak ada admin API di dalam container
+	auto_https off
+	admin off
+
+	frankenphp {
+	}
+}
+
+:8000 {
+	root * /var/www/html/public
+	encode zstd gzip
+
+	# Log akses ke stdout agar muncul di "docker compose logs backend"
+	log {
+		output stdout
+		format json
+	}
+
+	# FrankenPHP menjalankan PHP (Laravel) langsung di dalam proses server
+	php_server
+}

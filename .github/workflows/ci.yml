@@ -63,8 +63,7 @@ jobs:
 
   deploy:
     name: Deploy (build & push image ke ghcr.io)
-    # Hanya push ke main, dan hanya jika kedua job di atas lulus.
-    # Pull Request, branch dev, dan branch fitur berhenti sebelum job ini (status: skipped).
+    
     needs: [backend-tests, frontend-build]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -74,9 +73,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Nilai rahasia hanya ada di GitHub Secrets: tidak ditulis di repository,
-      # tidak dicetak ke log, dan tidak dimasukkan ke image.
-      # Saat container dijalankan, nilainya diberikan lewat environment (lihat docker-compose.yml).
       - name: Pastikan secrets sudah diisi
         env:
           APP_KEY: ${{ secrets.APP_KEY }}
@@ -92,7 +88,7 @@ jobs:
           esac
           echo "Secrets tersedia."
 
-      # ghcr.io mewajibkan nama image huruf kecil semua
+
       - name: Siapkan nama image
         run: echo "OWNER=${GITHUB_REPOSITORY_OWNER,,}" >> "$GITHUB_ENV"
 
