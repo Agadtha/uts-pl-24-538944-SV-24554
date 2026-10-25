@@ -16,7 +16,7 @@ async function submit() {
   message.value = ''
   try {
     const { data } = await http.post('/login', form.value)
-    auth.set(data.token, data.user) // token disimpan, dipakai interceptor axios
+    auth.set(data.token, data.user) 
     router.push({ name: 'barang' })
   } catch (e) {
     if (e.response?.status === 422) {

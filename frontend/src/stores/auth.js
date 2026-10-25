@@ -11,7 +11,7 @@ function readUser() {
   }
 }
 
-// State login yang dipakai bersama oleh router, axios, dan komponen
+
 export const auth = reactive({
   token: localStorage.getItem(TOKEN_KEY) || '',
   user: readUser(),
